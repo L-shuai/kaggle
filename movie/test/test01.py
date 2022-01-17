@@ -18,5 +18,9 @@ def test1():
     print(len(word2idx))
 
 
+def test2():
+    arr = [1,2,3,5]
+    print(arr[1:-1])
+
 if __name__ == '__main__':
-    test1()
+    test2()

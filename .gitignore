@@ -49,3 +49,8 @@ Thumbs.db
 /mvnw
 *.model
 *.npy
+*.txt
+*.pickle
+*.csv
+*.tsv
+saved_checkpoint_BERT

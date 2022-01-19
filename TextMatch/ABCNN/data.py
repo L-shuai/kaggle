@@ -128,5 +128,7 @@ def pad_sequences(sequences, maxlen=None, dtype='int32', padding='post',
             raise ValueError("Padding type '%s' not understood" % padding)
     return x
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # print('4' in str(gensim.__version__))
+    # print(get_word_list("我爱 新亂世佳人》《真愛一世情》ABC。北京！"))
+    print(load_embeddings("../data/token_vec_300.bin"))

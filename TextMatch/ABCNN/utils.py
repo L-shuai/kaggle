@@ -9,6 +9,8 @@ import torch.nn as nn
 import time
 from tqdm import tqdm
 from sklearn.metrics import roc_auc_score
+import numpy as np
+import pandas as pd
 
 def generate_sent_masks(enc_hiddens, source_lengths):
     """ Generate sentence masks for encoder hidden states.
@@ -215,3 +217,38 @@ def train(model, dataloader, optimizer, criterion, epoch_number, max_gradient_no
     epoch_loss = running_loss / len(dataloader)
     epoch_accuracy = correct_preds / len(dataloader.dataset)
     return epoch_time, epoch_loss, epoch_accuracy
+
+
+def sentence_avg_length(file):
+    """
+    计算训练集句子平均长度
+    :return:
+    """
+    df = pd.read_csv(file, delimiter="\t")
+    df.columns = ['sentence1', 'sentence2', 'label']
+    sentence_sum = 0
+    sentence_len=0
+    for sen in df['sentence1']:
+        sentence_sum = sentence_sum+1
+        sentence_len = sentence_len + len(sen)
+    for sen in df['sentence2']:
+        sentence_sum = sentence_sum+1
+        sentence_len = sentence_len + len(sen)
+    avg_len = int(sentence_len/sentence_sum)
+    print("训练集句子平均长度：",avg_len)
+
+
+def test_embedding():
+    from gensim.models import Word2Vec
+    w2v_path = "../data/token_vec_300.bin"
+
+    embedding = Word2Vec.load(w2v_path)
+    print(type(embedding))
+    print(embedding)
+    # print(embedding['i'])
+    for i, word in enumerate(embedding.wv.key_to_index):
+        print(word)
+
+if __name__ == '__main__':
+    # sentence_avg_length("../data/LCQMC_train.csv")
+    test_embedding()

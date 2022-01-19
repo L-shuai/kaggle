@@ -5,7 +5,6 @@ Created on Thu Mar  5 13:27:48 2020
 @author: zhaog
 """
 import os
-os.environ['CUDA_VISIBLE_DEVICES']='1,2,3'
 import torch
 from torch.utils.data import DataLoader
 import torch.nn as nn
@@ -22,8 +21,7 @@ def main(train_file, dev_file, embeddings_file, vocab_file, target_dir,
          max_grad_norm=10.0,
          gpu_index=0,
          checkpoint=None):
-    # device = torch.device("cuda:{}".format(gpu_index) if torch.cuda.is_available() else "cpu")
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:{}".format(gpu_index) if torch.cuda.is_available() else "cpu")
     print(20 * "=", " Preparing for training ", 20 * "=")
     # 保存模型的路径
     if not os.path.exists(target_dir):
@@ -38,14 +36,7 @@ def main(train_file, dev_file, embeddings_file, vocab_file, target_dir,
     # -------------------- Model definition ------------------- #
     print("\t* Building model...")
     embeddings = load_embeddings(embeddings_file)
-    model = ABCNN(embeddings, device=device)
-    if torch.cuda.device_count()>1:
-        model = nn.DataParallel(model)
-        if isinstance(model, torch.nn.DataParallel):
-            print("---")
-            model = model.module
-    # model.to(device)
-    model.cuda()
+    model = ABCNN(embeddings, device=device).to(device)
     # -------------------- Preparation for training  ------------------- #
     criterion = nn.CrossEntropyLoss()
     # 过滤出需要梯度更新的参数

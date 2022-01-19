@@ -97,7 +97,7 @@ def main(train_file, dev_file, embeddings_file, vocab_file, target_dir,
                         "epochs_count": epochs_count,
                         "train_losses": train_losses,
                         "valid_losses": valid_losses},
-                        os.path.join(target_dir, "best.pth.tar"))
+                        os.path.join(target_dir, "best_lenth100.pth.tar"))
         if patience_counter >= patience:
             print("-> Early stopping: patience limit reached, stopping...")
             break
@@ -105,5 +105,5 @@ def main(train_file, dev_file, embeddings_file, vocab_file, target_dir,
 if __name__ == "__main__":
     
     main("../data/LCQMC_train.csv","../data/LCQMC_dev.csv",
-         "../data/token_vec_300.bin", "../data/vocab.txt", "models",max_length=100)
+         "../data/token_vec_300.bin", "../data/vocab.txt", "models",max_length=50)
     

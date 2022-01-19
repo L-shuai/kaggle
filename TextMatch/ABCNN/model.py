@@ -71,6 +71,8 @@ class Wide_Conv(nn.Module):
         # => A: batch_size * seq_len * seq_len
         A = match_score(sent1, sent2, mask1, mask2)
         # attn_feature_map1: batch_size * seq_len * dim
+        print("A.shape:",A.shape)
+        print("self.W.shape:",self.W.shape)
         attn_feature_map1 = A.matmul(self.W)
         attn_feature_map2 = A.transpose(1, 2).matmul(self.W)
         # x1: batch_size * 2 *seq_len * dim

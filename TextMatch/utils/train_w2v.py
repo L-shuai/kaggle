@@ -64,8 +64,8 @@ class TrainWord2Vec:
         else:
             model = self.get_model(text)
         # 保存模型
-        model.save("../data/token_vec_300.model")
-        model.wv.save_word2vec_format("../data/token_vec_300.bin", binary=False)
+        model.save("../data/token_vec_300_cg.model")
+        model.wv.save_word2vec_format("../data/token_vec_300_cg.bin", binary=False)
 
 if __name__ == '__main__':
     trainmodel = TrainWord2Vec()

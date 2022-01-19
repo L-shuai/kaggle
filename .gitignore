@@ -50,6 +50,12 @@ Thumbs.db
 *.model
 *.npy
 *.txt
+*.bin
+*.csv
+*.tsv
+*.tar
+*.pdf
+*.txt
 *.pickle
 *.csv
 *.tsv

@@ -44,13 +44,16 @@ def main(p_sentence,h_sentence,vocab_file, embeddings_file, pretrained_file, max
     #         batch_time, total_time, (accuracy * 100), auc))
 
     with torch.no_grad():
-        p_list = torch.from_numpy(p_list).to(device)
-        h_list = torch.from_numpy(h_list).to(device)
+        # p_list = torch.from_numpy(p_list).to(device)
+        # h_list = torch.from_numpy(h_list).to(device)
+        p_list = torch.tensor(p_list,dtype=torch.long).to(device)
+        h_list = torch.tensor(h_list,dtype=torch.long).to(device)
+        print("h_list.type:",type(h_list))
         _, probs = model(p_list, h_list)
         print("probs= ",probs) #probs=  tensor([[0.9928, 0.0072]])
         print("probs= ",type(probs))#probs=  <class 'torch.Tensor'>
         print("probs= ",probs.shape)#probs=  torch.Size([1, 2])
-        print("probs= ",probs.numpy())#probs=  [[0.99283546 0.00716446]]
+        # print("probs= ",probs.numpy())#probs=  [[0.99283546 0.00716446]]
         _, out_classes = probs.max(dim=1)
         print("out_classes:",out_classes.shape) #out_classes: torch.Size([1])
         print("out_classes:",out_classes) #out_classes: tensor([0])

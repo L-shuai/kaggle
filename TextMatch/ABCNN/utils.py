@@ -150,7 +150,10 @@ def test(model, dataloader):
     all_labels = []
     # Deactivate autograd for evaluation.
     with torch.no_grad():
+        #self.p_list[idx], self.p_lengths[idx], self.h_list[idx], self.h_lengths[idx], self.label[idx]
         for (q, _, h, _, label) in dataloader:
+            print("q:",q)
+            print("h:",h)
             batch_start = time.time()
             # Move input and output data to the GPU if one is used.
             q1 = q.to(device)

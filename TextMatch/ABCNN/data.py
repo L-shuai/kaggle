@@ -75,11 +75,11 @@ def get_word_list(query):
 
 def load_embeddings(embdding_path):
     model = gensim.models.KeyedVectors.load_word2vec_format(embdding_path, binary=False)
-    # embedding_matrix = np.zeros((len(model.index2word) + 1, model.vector_size))
-    embedding_matrix = np.zeros((len(model.index_to_key) + 1, model.vector_size))
+    embedding_matrix = np.zeros((len(model.index2word) + 1, model.vector_size))
+    # embedding_matrix = np.zeros((len(model.index_to_key) + 1, model.vector_size))
     #填充向量矩阵
-    # for idx, word in enumerate(model.index2word):
-    for idx, word in enumerate(model.index_to_key):
+    for idx, word in enumerate(model.index2word):
+    # for idx, word in enumerate(model.index_to_key):
         embedding_matrix[idx + 1] = model[word]#词向量矩阵
     return embedding_matrix
 

@@ -37,7 +37,7 @@ def main(train_file, dev_file, embeddings_file, vocab_file, target_dir,
     # -------------------- Model definition ------------------- #
     print("\t* Building model...")
     embeddings = load_embeddings(embeddings_file)
-    model = ABCNN(embeddings, device=device).to(device)
+    model = ABCNN(embeddings, device=device,max_length=max_length).to(device)
     # -------------------- Preparation for training  ------------------- #
     criterion = nn.CrossEntropyLoss()
     # 过滤出需要梯度更新的参数

@@ -13,6 +13,7 @@ class ABCNN(nn.Module):
     def __init__(self, embeddings, num_layer=1, linear_size=300, max_length=50, device="gpu"):
         super(ABCNN, self).__init__()
         self.device = device
+        print("embeddings.shape:",embeddings.shape)
         self.embeds_dim = embeddings.shape[1]
         self.embed = nn.Embedding(embeddings.shape[0], embeddings.shape[1])
         self.embed.weight = nn.Parameter(torch.from_numpy(embeddings))
@@ -71,6 +72,8 @@ class Wide_Conv(nn.Module):
         # => A: batch_size * seq_len * seq_len
         A = match_score(sent1, sent2, mask1, mask2)
         # attn_feature_map1: batch_size * seq_len * dim
+        print("A.shape:",A.shape)
+        print("self.W.shape:",self.W.shape)
         attn_feature_map1 = A.matmul(self.W)
         attn_feature_map2 = A.transpose(1, 2).matmul(self.W)
         # x1: batch_size * 2 *seq_len * dim

@@ -12,6 +12,7 @@ from data import LCQMC_Dataset, load_embeddings
 from utils import train, validate
 from model import ABCNN
 
+# 根据实际语料库再定max_length。这里暂时设为50
 def main(train_file, dev_file, embeddings_file, vocab_file, target_dir, 
          max_length=50,
          epochs=50,
@@ -104,5 +105,5 @@ def main(train_file, dev_file, embeddings_file, vocab_file, target_dir,
 if __name__ == "__main__":
     
     main("../data/LCQMC_train.csv","../data/LCQMC_dev.csv",
-         "../data/token_vec_300.bin", "../data/vocab.txt", "models")
+         "../data/token_vec_300.bin", "../data/vocab.txt", "models",max_length=100)
     

@@ -60,3 +60,4 @@ Thumbs.db
 *.csv
 *.tsv
 saved_checkpoint_BERT
+*.cfg

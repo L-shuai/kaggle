@@ -13,6 +13,7 @@ class ABCNN(nn.Module):
     def __init__(self, embeddings, num_layer=1, linear_size=300, max_length=50, device="gpu"):
         super(ABCNN, self).__init__()
         self.device = device
+        print("embeddings.shape:",embeddings.shape)
         self.embeds_dim = embeddings.shape[1]
         self.embed = nn.Embedding(embeddings.shape[0], embeddings.shape[1])
         self.embed.weight = nn.Parameter(torch.from_numpy(embeddings))
